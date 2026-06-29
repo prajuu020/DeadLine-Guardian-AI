@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { generatePanicPlan } from "../services/gemini";
 import Navbar from "../components/Navbar";
+import ReactMarkdown from "react-markdown";
 
 
 function PanicModePage() {
@@ -71,10 +72,10 @@ function PanicModePage() {
       </div>
 
       {plan && (
-        <div className="bg-slate-900 mt-8 p-6 rounded-2xl whitespace-pre-wrap">
-          {plan}
-        </div>
-      )}
+  <div className="bg-slate-900 mt-8 p-6 rounded-2xl markdown">
+    <ReactMarkdown>{plan}</ReactMarkdown>
+  </div>
+)}
     </div>
   );
 }

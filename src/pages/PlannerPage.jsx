@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { generatePlan } from "../services/gemini";
 import Navbar from "../components/Navbar";
+import ReactMarkdown from "react-markdown";
 
 function PlannerPage() {
   const [goal, setGoal] = useState("");
@@ -40,10 +41,10 @@ function PlannerPage() {
       </button>
 
       {plan && (
-        <div className="bg-slate-900 p-6 rounded-2xl mt-8 whitespace-pre-wrap">
-          {plan}
-        </div>
-      )}
+  <div className="bg-slate-900 mt-8 p-6 rounded-2xl markdown">
+    <ReactMarkdown>{plan}</ReactMarkdown>
+  </div>
+)}
 
     </div>
   );

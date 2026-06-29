@@ -8,6 +8,7 @@ function Navbar() {
       <Link to="/tasks">Tasks</Link>
       <Link to="/planner">Planner</Link>
       <Link to="/panic-mode">Panic Mode</Link>
+      <Link to="/calendar">Calendar</Link>
       <Link to="/analytics">Analytics</Link>
       <Link to="/profile">Profile</Link>
       <Link to="/reminder">Reminder</Link>

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { generateDailyPlan } from "../services/gemini";
+import ReactMarkdown from "react-markdown";
 
 function DailyPlannerPage() {
   const [plan, setPlan] = useState("");

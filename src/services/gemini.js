@@ -31,15 +31,32 @@ Generate:
 5. Motivation.
 
 Keep the response practical and well-structured.
+
+Return the response in proper Markdown.
+
+Use:
+# Main Heading
+## Sub Heading
+### Section
+- Bullet points
+1. Numbered lists
+**Bold** for important points
+
+Do not return plain text.
 `;
 
     const result = await model.generateContent(prompt);
 
     return result.response.text();
-  } catch (error) {
-    console.log("Error generating plan:", error);
-    throw error;
+  }  catch (error) {
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Gemini API quota exceeded. Please try again later.";
   }
+
+return "Unable to generate goal roadmap.";
+}
 }
 
 // =====================================================
@@ -70,14 +87,31 @@ Create:
 5. Short motivational message.
 
 Keep the response concise and actionable.
+
+Return the response in proper Markdown.
+
+Use:
+# Main Heading
+## Sub Heading
+### Section
+- Bullet points
+1. Numbered lists
+**Bold** for important points
+
+Do not return plain text.
 `;
 
     const result = await model.generateContent(prompt);
 
     return result.response.text();
   } catch (error) {
-    console.log("Error generating panic plan:", error);
-    throw error;
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Gemini API quota exceeded. Please try again later.";
+  }
+
+return "Unable to generate emergency plan.";
   }
 }
 
@@ -106,14 +140,31 @@ Provide:
 4. Motivation.
 
 Keep the response short and practical.
+
+Return the response in proper Markdown.
+
+Use:
+# Main Heading
+## Sub Heading
+### Section
+- Bullet points
+1. Numbered lists
+**Bold** for important points
+
+Do not return plain text.
 `;
 
     const result = await model.generateContent(prompt);
 
     return result.response.text();
-  } catch (error) {
-    console.log("Error generating productivity tips:", error);
-    throw error;
+  }  catch (error) {
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Gemini API quota exceeded. Please try again later.";
+  }
+
+return "Unable to generate productivity tips.";
   }
 }
 
@@ -140,16 +191,39 @@ For each task provide:
 Tasks:
 ${JSON.stringify(tasks)}
 
-Return the response in beautiful numbered format.
+Return the response in proper Markdown.
+
+Format:
+
+# Task Priority Ranking
+
+For each task include:
+
+## Task Name
+
+**Priority:** High / Medium / Low
+
+**Reason:**
+- Explain why
+
+**Suggested Action**
+- Action 1
+- Action 2
+
+Use headings, bullet points and bold text.
 `;
 
     const result = await model.generateContent(prompt);
 
     return result.response.text();
   } catch (error) {
-    console.log(error);
-    return "Unable to generate recommendations.";
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Gemini API quota exceeded. Please try again later.";
   }
+
+  return "Unable to generate task priorities.";}
 };
 
 export const generateProductivityInsights = async (stats) => {
@@ -169,15 +243,32 @@ Statistics:
 ${JSON.stringify(stats)}
 
 Keep the response concise and motivating.
+
+Return the response in proper Markdown.
+
+Use:
+# Main Heading
+## Sub Heading
+### Section
+- Bullet points
+1. Numbered lists
+**Bold** for important points
+
+Do not return plain text.
 `;
 
     const result = await model.generateContent(prompt);
 
     return result.response.text();
-  } catch (error) {
-    console.log(error);
-    return "Unable to generate productivity insights.";
+ } catch (error) {
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Gemini API quota exceeded. Please try again later.";
   }
+return "Unable to generate productivity insights.";
+    
+}
 };
 
 export const generateDailyPlan = async (tasks) => {
@@ -198,26 +289,69 @@ Rules:
 Tasks:
 ${JSON.stringify(tasks)}
 
-Return:
-Time Slot - Task
-Reason
+Return the schedule in this format:
 
-Example:
+# Daily Schedule
 
-09:00 AM - Resume Building
-Reason: High priority and due tomorrow.
+## 09:00 AM
+**Task:** Resume Building
 
-11:00 AM - Study DSP
-Reason: Medium priority.
+**Reason:**
+High priority and due tomorrow.
 
-Include motivational advice at the end.
+## 11:00 AM
+**Task:** Study DSP
+
+**Reason:**
+Medium priority.
+
+Include a motivational quote at the end.
+
+Return the response in proper Markdown format.
+
+Requirements:
+- Use # for the title.
+- Use ## for each time slot.
+- Use **bold** for labels.
+- Use bullet points where needed.
+- Do not use HTML.
+- Do not return plain text.
+
 `;
 
-    const result = await model.generateContent(prompt);
+    let retries = 3;
 
+while (retries > 0) {
+  try {
+    const result = await model.generateContent(prompt);
     return result.response.text();
   } catch (error) {
-    console.log(error);
-    return "Unable to generate daily schedule.";
+    if (
+      error.message?.includes("503") &&
+      retries > 1
+    ) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, 3000)
+      );
+      retries--;
+      continue;
+    }
+
+    throw error;
   }
+}
+  } catch (error) {
+  console.log(error);
+
+  if (error.message?.includes("429")) {
+    return "⚠️ Daily API quota exceeded. Please try again later.";
+  }
+
+  if (error.message?.includes("503")) {
+    return "⚠️ Gemini is currently experiencing high demand. Please try again in a few minutes.";
+  }
+
+  return "Unable to generate daily plan.";
+}
 };
+

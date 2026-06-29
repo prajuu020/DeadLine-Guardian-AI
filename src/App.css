@@ -182,3 +182,35 @@
     border-right-color: var(--border);
   }
 }
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: white;
+  font-weight: bold;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.markdown p {
+  color: white;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.markdown strong {
+  color: #60a5fa;
+}
+
+.markdown ul,
+.markdown ol {
+  margin-left: 20px;
+}
+
+.markdown li {
+  margin-bottom: 8px;
+}
+
+.markdown hr {
+  border: 1px solid #334155;
+}

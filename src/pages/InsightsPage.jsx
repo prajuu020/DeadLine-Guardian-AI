@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { generateProductivityInsights } from "../services/gemini";
+import ReactMarkdown from "react-markdown";
 
 function InsightsPage() {
   const [stats, setStats] = useState({
@@ -125,7 +126,7 @@ function InsightsPage() {
         </div>
 
         {/* Productivity Score */}
-        <div className="bg-slate-900 mt-10 p-8 rounded-2xl">
+        <div className="bg-slate-900 mt-10 p-8 rounded-2xl border border-slate-700 shadow-xl">
           <h2 className="text-3xl font-bold mb-6">
             Productivity Score
           </h2>
@@ -143,17 +144,19 @@ function InsightsPage() {
         </div>
 
         {/* AI Insights */}
-        <div className="bg-slate-900 mt-10 p-8 rounded-2xl">
+        <div className="bg-slate-900 mt-10 p-8 rounded-2xl border border-slate-700 shadow-xl">
           <h2 className="text-3xl font-bold mb-6">
             🤖 AI Recommendations
           </h2>
 
           {loading ? (
-            <p>Generating insights...</p>
+            <p className="text-indigo-400 animate-pulse text-lg">
+  🤖 Gemini is analyzing your productivity...
+</p>
           ) : (
-            <div className="whitespace-pre-wrap leading-8 text-lg">
-              {aiInsights}
-            </div>
+            <div className="markdown leading-8 text-lg">
+  <ReactMarkdown>{aiInsights}</ReactMarkdown>
+</div>
           )}
         </div>
 

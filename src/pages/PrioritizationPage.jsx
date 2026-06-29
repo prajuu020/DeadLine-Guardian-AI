@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
+import ReactMarkdown from "react-markdown";
 import { generateTaskPriorities } from "../services/gemini";
 
 function PrioritizationPage() {
@@ -60,14 +61,14 @@ function PrioritizationPage() {
         </button>
 
         {priorities && (
-          <div className="mt-10 bg-slate-900 p-8 rounded-2xl">
-            <h2 className="text-3xl font-bold mb-6">
-              AI Recommendations
-            </h2>
+          <div className="mt-10 bg-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl">
+                      <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+  🎯 AI Recommendations
+</h2>
 
-            <div className="whitespace-pre-wrap text-lg leading-8">
-              {priorities}
-            </div>
+            <div className="markdown text-lg leading-8">
+  <ReactMarkdown>{priorities}</ReactMarkdown>
+</div>
           </div>
         )}
       </div>
