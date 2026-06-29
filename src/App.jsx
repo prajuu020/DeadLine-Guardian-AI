@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard'
 import TasksPage from './pages/TasksPage'
 import PlannerPage from './pages/PlannerPage'
 import PanicModePage from './pages/PanicModePage'
-import AnalyticsPage from './pages/AnalyticsPage'
 import ProfilePage from './pages/ProfilePage'
 import ReminderPage from "./pages/ReminderPage";
 import CalendarPage from "./pages/CalendarPage";
@@ -28,7 +27,6 @@ function App() {
       <Route path="/tasks" element={<TasksPage />} />
       <Route path="/planner" element={<PlannerPage />} />
       <Route path="/panic-mode" element={<PanicModePage />} />
-      <Route path="/analytics" element={<AnalyticsPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/reminder" element={<ReminderPage />} />
       <Route path="/calendar" element={<CalendarPage />} />

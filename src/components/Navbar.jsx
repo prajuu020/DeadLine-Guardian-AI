@@ -8,15 +8,15 @@ function Navbar() {
       <Link to="/tasks">Tasks</Link>
       <Link to="/planner">Planner</Link>
       <Link to="/panic-mode">Panic Mode</Link>
-      <Link to="/calendar">Calendar</Link>
-      <Link to="/analytics">Analytics</Link>
-      <Link to="/profile">Profile</Link>
       <Link to="/reminder">Reminder</Link>
       <Link to="/prioritize">AI Prioritization</Link>
       <Link to="/insights"> Insights </Link>
       <Link to="/habits"> Habits </Link>
       <Link to="/daily-planner"> Daily Planner </Link>
       <Link to="/voice-assistant"> Voice Assistant </Link>
+            <Link to="/calendar">Calendar</Link>
+                  <Link to="/profile">Profile</Link>
+
     </nav>
   );
 }
